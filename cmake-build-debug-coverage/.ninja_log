@@ -1,0 +1,5 @@
+# ninja log v5
+19	111	7332398024137328	CMakeFiles/engine.dir/src/color.cpp.obj	431fe52e206fc070
+7	2674	7332415768518853	CMakeFiles/engine.dir/src/graphics.cpp.obj	539f207564cda1cd
+6	3605	7332427226586511	CMakeFiles/engine.dir/src/main.cpp.obj	a08203917b814fde
+3607	3806	7332427228528384	engine.exe	d1973ddcbbc39f9

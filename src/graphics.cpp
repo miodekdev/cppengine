@@ -47,6 +47,10 @@ void Graphics::Draw(UINT32 x, UINT32 y, Color color) {
     data[x+y*rectangle.right] = color;
 }
 
+void Graphics::DrawSnapped(FLOAT x, FLOAT y, Color color) {
+    data[((UINT64) x)+((UINT64) y)*rectangle.right] = color;
+}
+
 int Graphics::Run(void (*start)(), void (*mainloop)()) {
     if (result != S_OK) {
         delete this;

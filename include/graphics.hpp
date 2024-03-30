@@ -26,7 +26,8 @@ private:
     Color* data;
 public:
     Graphics(HINSTANCE instance, LPCSTR name, UINT32 width = 0, UINT32 height = 0);
-    void Draw(UINT32 x, UINT32 y, Color color); // TODO add drawing by floats
+    void Draw(UINT32 x, UINT32 y, Color color);
+    void DrawSnapped(FLOAT x, FLOAT y, Color color); // TODO DrawPrecise
     int Run(void (*start)(), void (*mainloop)());
     ~Graphics();
 };

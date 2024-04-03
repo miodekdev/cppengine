@@ -12,7 +12,8 @@ struct RGBA {
     static RGBA FromInt(UINT32 rgba);
     static RGBA FromByte(BYTE brightness, BYTE alpha = 255);
 };
-using RGBA = RGBA;
+
+//TODO HSV color format
 
 class Graphics {
 private:

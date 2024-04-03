@@ -1,10 +1,10 @@
 bits 64
 default rel
 
-global AssemblyColorFromFloatArray
-global AssemblyColorFromFloats
-global AssemblyColorFromInt
-global AssemblyColorFromByte
+global AssemblyRGBAFromFloatArray
+global AssemblyRGBAFromFloats
+global AssemblyRGBAFromInt
+global AssemblyRGBAFromByte
 
 section .bss
     buffer          resd 4
@@ -13,7 +13,7 @@ section .data
     multiplier      times 4 dd 255.0
 
 section .text
-    AssemblyColorFromFloatArray:
+    AssemblyRGBAFromFloatArray:
         movaps      xmm0, [rcx]
         movaps      xmm1, [multiplier]
         mulps       xmm0, xmm1
@@ -23,23 +23,23 @@ section .text
         movd        eax,  xmm0 ; overflows and underflows are handled automatically by saturations above
         ret
 
-    AssemblyColorFromFloats:
+    AssemblyRGBAFromFloats:
         movd    [buffer+0],  xmm0 ; TODO Replace buffers with shifts
         movd    [buffer+4],  xmm1
         movd    [buffer+8],  xmm2
         movd    [buffer+12], xmm3
         lea     rcx, [buffer]
-        jmp     AssemblyColorFromFloatArray
+        jmp     AssemblyRGBAFromFloatArray
         ret
 
-    AssemblyColorFromInt:
+    AssemblyRGBAFromInt:
         mov eax, ecx
         ret
 
-    AssemblyColorFromByte:
-        mov ah, dl  ; Upon inspecting the registers when passing the Color struct through them, I have discovered that
-        mov al, cl  ; their values are in a reversed order here,
-        shl eax, 16 ; but everything was fine with AssemblyColorFromFloatArray. wtf? why?
+    AssemblyRGBAFromByte:
+        mov ah, dl  ; The return value here is expected in little endian, but in functions above it is in big endian.
+        mov al, cl  ; wtf? why?
+        shl eax, 16 ;
         mov ah, cl  ; TODO solve the mistery
         mov al, cl
         ret

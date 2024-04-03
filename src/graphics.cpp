@@ -2,10 +2,10 @@
 #define RESULT_CHECK if (result != S_OK) return;
 
 extern "C" {
-    Color AssemblyColorFromFloatArray(FLOAT* color);
-    Color AssemblyColorFromFloats(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha);
-    Color AssemblyColorFromInt(UINT32 rgba);
-    Color AssemblyColorFromByte(BYTE brightness, BYTE opacity);
+    RGBA AssemblyRGBAFromFloatArray(FLOAT* color);
+    RGBA AssemblyRGBAFromFloats(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha);
+    RGBA AssemblyRGBAFromInt(UINT32 rgba);
+    RGBA AssemblyRGBAFromByte(BYTE brightness, BYTE opacity);
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -39,15 +39,15 @@ Graphics::Graphics(HINSTANCE instance, LPCSTR name, UINT32 width, UINT32 height)
                                                                                        D2D1_ALPHA_MODE_IGNORE));
     result = target->CreateBitmap(size, nullptr, 0, bitmapProperties, &bitmap); RESULT_CHECK
 
-    data = new Color[size.width * size.height];
-    stride = sizeof(Color) * size.width;
+    data = new RGBA[size.width * size.height];
+    stride = sizeof(RGBA) * size.width;
 }
 
-void Graphics::Draw(UINT32 x, UINT32 y, Color color) {
+void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
     data[x+y*rectangle.right] = color;
 }
 
-void Graphics::DrawSnapped(FLOAT x, FLOAT y, Color color) {
+void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
     data[((UINT64) x)+((UINT64) y)*rectangle.right] = color;
 }
 
@@ -91,18 +91,18 @@ Graphics::~Graphics() {
     if (target) target->Release();
 }
 
-Color Color::FromFloat(FLOAT* color) {
-    return AssemblyColorFromFloatArray(color);
+RGBA RGBA::FromFloat(FLOAT* color) {
+    return AssemblyRGBAFromFloatArray(color);
 }
 
-Color Color::FromFloat(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha) {
-    return AssemblyColorFromFloats(red, green, blue, alpha);
+RGBA RGBA::FromFloat(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha) {
+    return AssemblyRGBAFromFloats(red, green, blue, alpha);
 }
 
-Color Color::FromInt(UINT32 rgba) {
-    return AssemblyColorFromInt(rgba);
+RGBA RGBA::FromInt(UINT32 rgba) {
+    return AssemblyRGBAFromInt(rgba);
 }
 
-Color Color::FromByte(BYTE brightness, BYTE alpha) {
-    return AssemblyColorFromByte(brightness, alpha);
+RGBA RGBA::FromByte(BYTE brightness, BYTE alpha) {
+    return AssemblyRGBAFromByte(brightness, alpha);
 }

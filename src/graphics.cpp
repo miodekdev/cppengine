@@ -17,9 +17,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 Graphics::Graphics(HINSTANCE instance, LPCSTR name, UINT32 width, UINT32 height) {
     if (!width) width = GetSystemMetrics(SM_CXSCREEN);
     if (!height) height = GetSystemMetrics(SM_CYSCREEN);
-    D2D1_SIZE_U size = D2D1::SizeU(width, height);
-    rectangle.right = size.width;
-    rectangle.bottom = size.height;
+    rectangle.right = width;
+    rectangle.bottom = height;
     
     WNDCLASS windowClass{};
     windowClass.lpfnWndProc = WindowProc;
@@ -33,14 +32,14 @@ Graphics::Graphics(HINSTANCE instance, LPCSTR name, UINT32 width, UINT32 height)
     result = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &factory); RESULT_CHECK
     
     result = factory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(),
-                                             D2D1::HwndRenderTargetProperties(handle, size), &target); RESULT_CHECK
+                                             D2D1::HwndRenderTargetProperties(handle, {width, height}), &target); RESULT_CHECK
     
     D2D1_BITMAP_PROPERTIES bitmapProperties = D2D1::BitmapProperties(D2D1::PixelFormat(DXGI_FORMAT_B8G8R8A8_UNORM,
                                                                                        D2D1_ALPHA_MODE_IGNORE));
-    result = target->CreateBitmap(size, nullptr, 0, bitmapProperties, &bitmap); RESULT_CHECK
+    result = target->CreateBitmap({width, height}, nullptr, 0, bitmapProperties, &bitmap); RESULT_CHECK
 
-    data = new RGBA[size.width * size.height];
-    stride = sizeof(RGBA) * size.width;
+    data = new RGBA[width * height];
+    stride = sizeof(RGBA) * width;
 }
 
 void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {

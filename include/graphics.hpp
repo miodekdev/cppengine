@@ -1,6 +1,9 @@
 #pragma once
 #include <d2d1_1.h>
 
+struct RGBA;
+struct HSV;
+
 struct RGBA {
     BYTE red;
     BYTE green;

@@ -11,9 +11,16 @@ struct RGBA {
     static RGBA FromFloat(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha = 1.0);
     static RGBA FromInt(UINT32 rgba);
     static RGBA FromByte(BYTE brightness, BYTE alpha = 255);
+    static RGBA FromHSV(HSV color); //TODO
 };
 
-//TODO HSV color format
+struct HSV {
+    FLOAT hue;
+    FLOAT saturation;
+    FLOAT value;
+
+    static HSV FromRGBA(RGBA color); //TODO
+};
 
 class Graphics {
 private:
@@ -28,7 +35,9 @@ private:
 public:
     Graphics(HINSTANCE instance, LPCSTR name, UINT32 width = 0, UINT32 height = 0);
     void Draw(UINT32 x, UINT32 y, RGBA color);
-    void DrawSnapped(FLOAT x, FLOAT y, RGBA color); // TODO DrawPrecise
+    void DrawTruncated(FLOAT x, FLOAT y, RGBA color);
+    void DrawSnapped(FLOAT x, FLOAT y, RGBA color); //TODO
+    void DrawPrecise(FLOAT x, FLOAT y, RGBA color); //TODO
     int Run(void (*start)(), void (*mainloop)());
     ~Graphics();
 };

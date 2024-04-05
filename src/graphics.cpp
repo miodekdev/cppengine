@@ -47,7 +47,7 @@ void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
     data[x+y*rectangle.right] = color;
 }
 
-void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
+void Graphics::DrawTruncated(FLOAT x, FLOAT y, RGBA color) {
     data[((UINT64) x)+((UINT64) y)*rectangle.right] = color;
 }
 

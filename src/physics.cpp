@@ -9,18 +9,7 @@ extern "C" {
     void AsmBodyApplySpeed(Body* body);
 }
 
-float Vector::Distance(Vector vector1, Vector vector2) {
-    return AsmVectorDistance(vector1, vector2);
-}
-
-float Vector::Magnitude() {
-    return AsmVectorMagnitude(this);
-}
-
-Vector Vector::Normalized() {
-    return AsmVectorNormalized(this);
-}
-
-void Body::ApplySpeed() {
-    return AsmBodyApplySpeed(this);
-}
+float Vector::Distance(Vector vector1, Vector vector2) {return AsmVectorDistance(vector1, vector2);}
+float Vector::Magnitude() {return AsmVectorMagnitude(this);}
+Vector Vector::Normalized() {return AsmVectorNormalized(this);}
+void Body::ApplySpeed() {return AsmBodyApplySpeed(this);}

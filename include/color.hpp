@@ -13,7 +13,6 @@ struct RGBA {
     static RGBA FromFloat(FLOAT* color);
     static RGBA FromFloat(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha = 1.0);
     static RGBA FromInt(UINT32 rgba);
-    static RGBA FromByte(BYTE brightness, BYTE alpha = 255);
     static RGBA FromHSV(HSV color); //TODO
 };
 

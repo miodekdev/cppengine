@@ -6,8 +6,9 @@ set(COMPILE_STATIC TRUE)
 enable_language(ASM_NASM)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/include)
-add_executable(engine WIN32 include/physics.hpp include/graphics.hpp
-        src/main.cpp src/graphics.cpp asm/color.asm src/physics.cpp asm/physics.asm asm/graphics.asm)
+add_executable(engine WIN32 include/physics.hpp include/graphics.hpp include/color.hpp
+        src/main.cpp src/graphics.cpp src/physics.cpp src/color.cpp
+        asm/color.asm asm/physics.asm asm/graphics.asm)
 target_compile_definitions(engine PRIVATE _MBCS)
 target_link_libraries(engine PRIVATE d2d1.lib)
 

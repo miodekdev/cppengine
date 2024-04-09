@@ -2,11 +2,6 @@
 #define RESULT_CHECK if (result != S_OK) return;
 
 extern "C" {
-    RGBA AssemblyRGBAFromFloatArray(FLOAT* color);
-    RGBA AssemblyRGBAFromFloats(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha);
-    RGBA AssemblyRGBAFromInt(UINT32 rgba);
-    RGBA AssemblyRGBAFromByte(BYTE brightness, BYTE opacity);
-
     void AssemblyDrawTruncated(RGBA* data, FLOAT x, FLOAT y, RGBA color);
     void AssemblyDrawSnapped(RGBA* data, FLOAT x, FLOAT y, RGBA color);
     void AssemblyDrawPrecise(RGBA* data, FLOAT x, FLOAT y, RGBA color);
@@ -101,20 +96,4 @@ void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) {
 
 void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
     AssemblyDrawSnapped(data, x, y, color);
-}
-
-RGBA RGBA::FromFloat(FLOAT* color) {
-    return AssemblyRGBAFromFloatArray(color);
-}
-
-RGBA RGBA::FromFloat(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha) {
-    return AssemblyRGBAFromFloats(red, green, blue, alpha);
-}
-
-RGBA RGBA::FromInt(UINT32 rgba) {
-    return AssemblyRGBAFromInt(rgba);
-}
-
-RGBA RGBA::FromByte(BYTE brightness, BYTE alpha) {
-    return AssemblyRGBAFromByte(brightness, alpha);
 }

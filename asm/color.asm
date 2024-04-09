@@ -6,6 +6,7 @@ global AssemblyRGBAFromFloats
 global AssemblyRGBAFromInt
 global AssemblyRGBAFromByte
 
+
 section .bss
     buffer          resd 4
 

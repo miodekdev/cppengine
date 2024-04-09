@@ -6,6 +6,10 @@ extern "C" {
     RGBA AssemblyRGBAFromFloats(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha);
     RGBA AssemblyRGBAFromInt(UINT32 rgba);
     RGBA AssemblyRGBAFromByte(BYTE brightness, BYTE opacity);
+
+    void AssemblyDrawTruncated(RGBA* data, FLOAT x, FLOAT y, RGBA color);
+    void AssemblyDrawSnapped(RGBA* data, FLOAT x, FLOAT y, RGBA color);
+    void AssemblyDrawPrecise(RGBA* data, FLOAT x, FLOAT y, RGBA color);
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -40,14 +44,6 @@ Graphics::Graphics(HINSTANCE instance, LPCSTR name, UINT32 width, UINT32 height)
 
     data = new RGBA[width * height];
     stride = sizeof(RGBA) * width;
-}
-
-void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
-    data[x+y*rectangle.right] = color;
-}
-
-void Graphics::DrawTruncated(FLOAT x, FLOAT y, RGBA color) {
-    data[((UINT64) x)+((UINT64) y)*rectangle.right] = color;
 }
 
 int Graphics::Run(void (*start)(), void (*mainloop)()) {
@@ -88,6 +84,23 @@ Graphics::~Graphics() {
     delete[] data;
     if (factory) factory->Release();
     if (target) target->Release();
+}
+
+void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
+    data[x+y*rectangle.right] = color;
+}
+
+void Graphics::DrawTruncated(FLOAT x, FLOAT y, RGBA color) {
+    //data[((UINT64) x)+((UINT64) y)*rectangle.right] = color;
+    AssemblyDrawTruncated(data, x, y, color);
+}
+
+void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) {
+    AssemblyDrawPrecise(data, x, y, color);
+}
+
+void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
+    AssemblyDrawSnapped(data, x, y, color);
 }
 
 RGBA RGBA::FromFloat(FLOAT* color) {

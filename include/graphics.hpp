@@ -39,8 +39,8 @@ public:
     Graphics(HINSTANCE instance, LPCSTR name, UINT32 width = 0, UINT32 height = 0);
     void Draw(UINT32 x, UINT32 y, RGBA color);
     void DrawTruncated(FLOAT x, FLOAT y, RGBA color);
-    void DrawSnapped(FLOAT x, FLOAT y, RGBA color); //TODO
-    void DrawPrecise(FLOAT x, FLOAT y, RGBA color); //TODO
+    void DrawSnapped(FLOAT x, FLOAT y, RGBA color);
+    void DrawPrecise(FLOAT x, FLOAT y, RGBA color);
     int Run(void (*start)(), void (*mainloop)());
     ~Graphics();
 };

@@ -3,12 +3,13 @@
 #include <iostream>
 
 Graphics* graphics;
-
+FLOAT f = 0;
 void Start() {
 
 }
 void MainLoop() {
-
+    graphics->DrawRounded(f, f, {255, 255, 255});
+    f++;
 }
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR cmd, int nCmdShow) {

@@ -14,5 +14,5 @@ section .text
         cvtps2dq    xmm0, xmm0
         packssdw    xmm0, xmm0
         packuswb    xmm0, xmm0
-        movd        eax,  xmm0 ; overflows and underflows are handled automatically by saturations above
+        movd        eax,  xmm0
         ret

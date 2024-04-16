@@ -14,4 +14,5 @@ struct RGBA {
     static RGBA FromInt(UINT32 rgba);
 
     RGBA operator*(FLOAT multiplier);
+    RGBA operator/(FLOAT multiplier);
 };

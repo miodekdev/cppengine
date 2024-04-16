@@ -82,6 +82,7 @@ void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
 void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
     data[(UINT32)x+(UINT32)y*rectangle.right] = color;
 }
-void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) {
-
+void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) { // TODO
+    float differenceX = x - (FLOAT) (UINT32) x;
+    float differenceY = y - (FLOAT) (UINT32) y;
 }

@@ -19,3 +19,7 @@ RGBA RGBA::FromInt(UINT32 rgba) {
 RGBA RGBA::operator*(FLOAT multiplier) {
     return AssemblyMultiplyRGBAByFloat(*this, multiplier);
 }
+
+RGBA RGBA::operator/(FLOAT multiplier) {
+    return AssemblyMultiplyRGBAByFloat(*this, 1/multiplier);
+}

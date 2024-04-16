@@ -1,5 +1,6 @@
 #pragma once
 #include "color.hpp"
+#include "physics.hpp"
 
 class Graphics {
 private:

@@ -16,4 +16,3 @@ namespace physics {
         void ApplySpeed();
     };
 }
-

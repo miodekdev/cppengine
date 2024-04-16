@@ -8,8 +8,9 @@ void Start() {
 
 }
 void MainLoop() {
-    graphics->DrawRounded(f, f, {255, 255, 255});
-    f++;
+    RGBA a = RGBA::FromFloat(1.0, 0.5, 0.1);
+    RGBA c = RGBA{255, 255, 255, 0} * 0.5;
+    graphics->DrawSnapped(100, 100, {0, 255, 0});
 }
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR cmd, int nCmdShow) {

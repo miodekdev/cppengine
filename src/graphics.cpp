@@ -1,11 +1,6 @@
 #include "graphics.hpp"
 #define RESULT_CHECK if (result != S_OK) return;
 
-extern "C" {
-    void AssemblyDrawRounded(FLOAT x, FLOAT y, RGBA color, RGBA* data, UINT32 width);
-    void AssemblyDrawPrecise(FLOAT x, FLOAT y, RGBA color, RGBA* data, UINT32 width);
-}
-
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     if (uMsg == WM_DESTROY || (uMsg == WM_KEYDOWN && wParam == VK_ESCAPE)) PostQuitMessage(0);
     else return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -84,5 +79,9 @@ void Graphics::Draw(UINT32 x, UINT32 y, RGBA color) {
     data[x+y*rectangle.right] = color;
 }
 
-void Graphics::DrawRounded(FLOAT x, FLOAT y, RGBA color) {AssemblyDrawRounded(x, y, color, data, rectangle.right);}
-void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) {AssemblyDrawPrecise(x, y, color, data, rectangle.right);}
+void Graphics::DrawSnapped(FLOAT x, FLOAT y, RGBA color) {
+    data[(UINT32)x+(UINT32)y*rectangle.right] = color;
+}
+void Graphics::DrawPrecise(FLOAT x, FLOAT y, RGBA color) {
+
+}

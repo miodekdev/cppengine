@@ -33,12 +33,3 @@ section .text
     divps    xmm3, xmm0
     movq     rax, xmm3
     ret
-
-    AsmBodyApplySpeed:
-    movq    xmm0, [rcx]
-    add     rcx,  8
-    movq    xmm1, [rcx]
-    addps   xmm0, xmm1
-    sub     rcx,  8
-    movq    [rcx], xmm0
-    ret

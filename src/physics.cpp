@@ -1,4 +1,5 @@
 #include "physics.hpp"
+#include <immintrin.h>
 
 using namespace physics;
 
@@ -6,10 +7,40 @@ extern "C" {
     float AsmVectorDistance(Vector vector1, Vector vector2);
     float AsmVectorMagnitude(Vector* vector);
     Vector AsmVectorNormalized(Vector* vector);
-    void AsmBodyApplySpeed(Body* body);
+}
+// TODO Compare performance - intrinsics vs assembly
+float Vector::Distance(Vector vector1, Vector vector2) {
+    __m128 xmm0 = _mm_load_ps((float*) &vector1);
+    __m128 xmm1 = _mm_load_ps((float*) &vector2);
+    xmm0 = _mm_sub_ps(xmm0, xmm1);
+    xmm0 = _mm_mul_ps(xmm0, xmm0);
+    xmm0 = _mm_hadd_ps(xmm0, xmm0);
+    xmm0 = _mm_sqrt_ss(xmm0);
+    return _mm_cvtss_f32(xmm0);
 }
 
-float Vector::Distance(Vector vector1, Vector vector2) {return AsmVectorDistance(vector1, vector2);}
-float Vector::Magnitude() {return AsmVectorMagnitude(this);}
-Vector Vector::Normalized() {return AsmVectorNormalized(this);}
-void Body::ApplySpeed() {return AsmBodyApplySpeed(this);}
+float Vector::Magnitude() { // TODO test
+    __m128 xmm0 = _mm_load_ss((float*) this);
+    __m128 xmm1 = _mm_load_ss((float*) this+4);
+    xmm0 = _mm_mul_ss(xmm0, xmm0);
+    xmm1 = _mm_mul_ss(xmm1, xmm1);
+    xmm0 = _mm_add_ss(xmm0, xmm1);
+    xmm0 = _mm_sqrt_ss(xmm0);
+    return _mm_cvtss_f32(xmm0);
+}
+
+Vector Vector::Normalized() { // TODO test
+    float magnitude = this->Magnitude();
+    __m128 xmm0 = _mm_load_ps((float*) this);
+    __m128 xmm1 = _mm_load_ss(&magnitude);
+    xmm1 = _mm_moveldup_ps(xmm1);
+    xmm0 = _mm_div_ps(xmm0, xmm1);
+    auto result = _mm_cvtss_i64(xmm0);
+    return *(Vector*) (void*) &result;
+}
+void Body::ApplySpeed() {
+    __m128 xmm0 = _mm_load_ps((float*) &position);
+    __m128 xmm1 = _mm_load_ps((float*) &speed);
+    xmm0 = _mm_add_ps(xmm0, xmm1);
+    _mm_storeu_si64(&position, (__m128i) xmm0);
+}

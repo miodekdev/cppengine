@@ -4,6 +4,7 @@
 Graphics* graphics; // TODO change assembly for intel intrinsics
 
 void Start() {
+    float d = physics::Vector::Distance({0, 0}, {1, 1});
 
 }
 void MainLoop() {

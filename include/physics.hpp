@@ -1,12 +1,13 @@
 #pragma once
+#include <WinDef.h>
 
 namespace physics {
     struct Vector {
-        float x;
-        float y;
+        FLOAT x;
+        FLOAT y;
 
-        static float Distance(Vector vector1, Vector vector2);
-        float Magnitude();
+        static FLOAT Distance(Vector vector1, Vector vector2);
+        FLOAT Magnitude();
         Vector Normalized();
     };
     struct Body {

@@ -3,12 +3,6 @@
 
 using namespace physics;
 
-extern "C" {
-    float AsmVectorDistance(Vector vector1, Vector vector2);
-    float AsmVectorMagnitude(Vector* vector);
-    Vector AsmVectorNormalized(Vector* vector);
-}
-// TODO Compare performance - intrinsics vs assembly
 FLOAT Vector::Distance(Vector vector1, Vector vector2) {
     __m128 xmm0 = _mm_load_ps((float*) &vector1);
     __m128 xmm1 = _mm_load_ps((float*) &vector2);

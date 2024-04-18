@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_engine: phony || CMakeFiles/engine.dir
 build CMakeFiles/engine.dir/src/main.cpp.obj: CXX_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/src/main.cpp || cmake_object_order_depends_target_engine
   DEFINES = -D_MBCS
   DEP_FILE = CMakeFiles\engine.dir\src\main.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -malign-double -m64 -O3 -g -fdiagnostics-color=always
   INCLUDES = -IC:/Users/maksy/Projects/engine/include
   OBJECT_DIR = CMakeFiles\engine.dir
   OBJECT_FILE_DIR = CMakeFiles\engine.dir\src
@@ -60,7 +60,7 @@ build CMakeFiles/engine.dir/src/main.cpp.obj: CXX_COMPILER__engine_unscanned_Deb
 build CMakeFiles/engine.dir/src/graphics.cpp.obj: CXX_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/src/graphics.cpp || cmake_object_order_depends_target_engine
   DEFINES = -D_MBCS
   DEP_FILE = CMakeFiles\engine.dir\src\graphics.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -malign-double -m64 -O3 -g -fdiagnostics-color=always
   INCLUDES = -IC:/Users/maksy/Projects/engine/include
   OBJECT_DIR = CMakeFiles\engine.dir
   OBJECT_FILE_DIR = CMakeFiles\engine.dir\src
@@ -68,7 +68,7 @@ build CMakeFiles/engine.dir/src/graphics.cpp.obj: CXX_COMPILER__engine_unscanned
 build CMakeFiles/engine.dir/src/physics.cpp.obj: CXX_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/src/physics.cpp || cmake_object_order_depends_target_engine
   DEFINES = -D_MBCS
   DEP_FILE = CMakeFiles\engine.dir\src\physics.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -malign-double -m64 -O3 -g -fdiagnostics-color=always
   INCLUDES = -IC:/Users/maksy/Projects/engine/include
   OBJECT_DIR = CMakeFiles\engine.dir
   OBJECT_FILE_DIR = CMakeFiles\engine.dir\src
@@ -76,7 +76,7 @@ build CMakeFiles/engine.dir/src/physics.cpp.obj: CXX_COMPILER__engine_unscanned_
 build CMakeFiles/engine.dir/src/color.cpp.obj: CXX_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/src/color.cpp || cmake_object_order_depends_target_engine
   DEFINES = -D_MBCS
   DEP_FILE = CMakeFiles\engine.dir\src\color.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
+  FLAGS = -malign-double -m64 -O3 -g -fdiagnostics-color=always
   INCLUDES = -IC:/Users/maksy/Projects/engine/include
   OBJECT_DIR = CMakeFiles\engine.dir
   OBJECT_FILE_DIR = CMakeFiles\engine.dir\src
@@ -104,7 +104,7 @@ build CMakeFiles/engine.dir/asm/physics.asm.obj: ASM_NASM_COMPILER__engine_unsca
 # Link the executable engine.exe
 
 build engine.exe: CXX_EXECUTABLE_LINKER__engine_Debug CMakeFiles/engine.dir/src/main.cpp.obj CMakeFiles/engine.dir/src/graphics.cpp.obj CMakeFiles/engine.dir/src/physics.cpp.obj CMakeFiles/engine.dir/src/color.cpp.obj CMakeFiles/engine.dir/asm/color.asm.obj CMakeFiles/engine.dir/asm/physics.asm.obj
-  FLAGS = -g
+  FLAGS = -malign-double -m64 -O3 -g
   LINK_FLAGS = -mwindows --static
   LINK_LIBRARIES = -ld2d1  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LC:/Users/maksy/Projects/engine/lib

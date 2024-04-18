@@ -13,7 +13,7 @@ public:
     RGBA(FLOAT red, FLOAT green, FLOAT blue, FLOAT alpha = 1.0);
     RGBA operator*(FLOAT multiplier);
     RGBA operator/(FLOAT multiplier);
-    operator UINT32();
+    explicit operator UINT32();
 private:
     explicit RGBA(__m128 xmm0);
 };

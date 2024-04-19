@@ -4,7 +4,8 @@
 Graphics* graphics;
 
 void Start() {
-
+    auto c = RGBA(52945);
+    auto i = (UINT32) c;
 }
 void MainLoop() {
 

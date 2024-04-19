@@ -9,10 +9,10 @@ struct RGBA {
 
 public:
     RGBA();
-    RGBA(__m128 rgba);
-    RGBA(UINT32 rgba);
+    explicit RGBA(__m128 rgba);
+    explicit RGBA(UINT32 rgba);
     RGBA(BYTE red, BYTE blue, BYTE green, BYTE alpha = 255);
     RGBA operator * (FLOAT multiplier);
     RGBA operator / (FLOAT multiplier);
-    operator UINT32 ();
+    explicit operator UINT32 ();
 };

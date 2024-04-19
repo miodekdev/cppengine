@@ -29,24 +29,25 @@ RGBA::RGBA(UINT32 rgba):
     alpha(rgba & 0xFF) {}
 
 RGBA RGBA::operator * (FLOAT multiplier) { // TODO fix, test
-    __m128i xmm0 = _mm_cvtsi32_si128(0);
+    __m128i xmm0 = _mm_loadu_si32(this);
     __m128 xmm1 = _mm_load_ps(&multiplier);
     __m128i zero{};
     xmm0 = _mm_unpacklo_epi8(xmm0, zero);
     xmm0 = _mm_unpacklo_epi16(xmm0, zero);
+    // TODO store alpha in a buffer so it wont be affected
     __m128 xmm2 = _mm_cvtepi32_ps(xmm0);
     xmm1 = _mm_shuffle_ps(xmm1, xmm1, 0);
     xmm2 = _mm_mul_ps(xmm2, xmm1);
-    //return RGBA(xmm2);
+    return RGBA(xmm2);
 }
 
 RGBA RGBA::operator / (FLOAT multiplier) {
-    return this->operator * (1/multiplier);
+    return *this * (1/multiplier);
 }
 
 RGBA::operator UINT32() {
-    BYTE bigEndian[4] = {red, green, blue, alpha};
     BYTE littleEndian[4] = {alpha, blue, green, red};
-
+    return *reinterpret_cast<UINT32*>(littleEndian); // IMPORTANT: This code assumes that little endian is used
+    BYTE bigEndian[4] = {red, green, blue, alpha};
     return *reinterpret_cast<UINT32*>((&red < &alpha) ? littleEndian : bigEndian);
 }

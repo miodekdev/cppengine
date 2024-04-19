@@ -1,7 +1,7 @@
 #include "graphics.hpp"
 #include <iostream>
 
-Graphics* graphics; // TODO change assembly for intel intrinsics
+Graphics* graphics;
 
 void Start() {
 

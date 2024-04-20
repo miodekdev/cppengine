@@ -16,7 +16,7 @@ RGBA::RGBA():
     blue(0),
     alpha(255) {}
 
-RGBA::RGBA(BYTE red, BYTE blue, BYTE green, BYTE alpha):
+RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
     red(red),
     blue(blue),
     green(green),

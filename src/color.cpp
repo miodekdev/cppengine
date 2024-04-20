@@ -1,8 +1,18 @@
 #include "color.hpp"
 
-RGBA::RGBA(__m128 rgba) {
-    *this = RGBA(_mm_cvtps_epi32(rgba));
-}
+RGBA::RGBA():
+        red(0),
+        green(0),
+        blue(0),
+        alpha(255) {}
+
+RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
+        red(red),
+        blue(blue),
+        green(green),
+        alpha(alpha) {}
+
+RGBA::RGBA(__m128 rgba) {*this = RGBA(_mm_cvtps_epi32(rgba));}
 
 RGBA::RGBA(__m128i rgba) {
     rgba = _mm_packs_epi32(rgba, rgba);
@@ -11,27 +21,13 @@ RGBA::RGBA(__m128i rgba) {
     *this = *reinterpret_cast<RGBA*>(&result);
 }
 
-RGBA::RGBA():
-    red(0),
-    green(0),
-    blue(0),
-    alpha(255) {}
-
-RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
-    red(red),
-    blue(blue),
-    green(green),
-    alpha(alpha) {}
-
 RGBA RGBA::operator * (FLOAT multiplier) const {
     auto multiplicands = static_cast<__m128>(*this);
     __m128 multipliers = _mm_set1_ps(multiplier);
     return RGBA(_mm_mul_ps(multiplicands, multipliers));
 }
 
-RGBA RGBA::operator / (FLOAT divisor) const {
-    return *this * (1/divisor);
-}
+RGBA RGBA::operator / (FLOAT divisor) const {return *this * (1/divisor);}
 
 RGBA RGBA::operator - () const {
     return RGBA{static_cast<BYTE>(255-red), static_cast<BYTE>(255-green), static_cast<BYTE>(255-blue), alpha};

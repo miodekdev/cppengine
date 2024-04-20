@@ -1,8 +1,6 @@
 #include "color.hpp"
 
 RGBA::RGBA(__m128 rgba) {
-    const __m128 multiplier{255, 255, 255, 255};
-    rgba = _mm_mul_ps(rgba, multiplier);
     *this = RGBA(_mm_cvtps_epi32(rgba));
 }
 
@@ -25,8 +23,11 @@ RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
     green(green),
     alpha(alpha) {}
 
-RGBA RGBA::operator * (FLOAT multiplier) const { // TODO fix, test
-
+RGBA RGBA::operator * (FLOAT multiplier) const {
+    auto multiplicands = static_cast<__m128>(*this);
+    __m128 multipliers = _mm_load_ps(&multiplier);
+    multipliers = _mm_set1_ps(multiplier);
+    return RGBA(_mm_mul_ps(multiplicands, multipliers));
 }
 
 RGBA RGBA::operator / (FLOAT divisor) const {
@@ -37,10 +38,14 @@ RGBA RGBA::operator - () const {
     return RGBA{static_cast<BYTE>(255-red), static_cast<BYTE>(255-green), static_cast<BYTE>(255-blue), alpha};
 }
 
-RGBA::operator __m128() {
-    const __m128 zero{};
+RGBA::operator __m128i() const {
+    const __m128i zero{};
     __m128i rgba = _mm_loadu_si32(this);
     rgba = _mm_unpacklo_epi8(rgba, zero);
-    rgba = _mm_unpackhi_epi16(rgba, zero);
-    return _mm_cvtepi32_ps(rgba);
+    rgba = _mm_unpacklo_epi16(rgba, zero);
+    return rgba;
+}
+
+RGBA::operator __m128() const {
+    return _mm_cvtepi32_ps(static_cast<__m128i>(*this));
 }

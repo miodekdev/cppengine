@@ -14,11 +14,10 @@ public:
     RGBA operator - () const;
     RGBA operator * (FLOAT multiplier) const;
     RGBA operator / (FLOAT divisor) const;
-    RGBA& operator *= (FLOAT multiplier); // TODO
-    RGBA& operator /= (FLOAT multiplier); // TODO
 
 private:
     explicit RGBA(__m128 rgba);  // These functions are private, because they don't take endianness into account
     explicit RGBA(__m128i rgba); // and take arguments as they are.
-    explicit operator __m128();
+    explicit operator __m128() const;
+    explicit operator __m128i() const;
 };

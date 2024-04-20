@@ -7,14 +7,18 @@ struct RGBA {
     BYTE blue{};
     BYTE alpha{};
 
+public:
     explicit RGBA();
-    explicit RGBA(__m128 rgba);
-    explicit RGBA(UINT32 rgba);
     RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255);
 
+    RGBA operator - () const;
     RGBA operator * (FLOAT multiplier) const;
     RGBA operator / (FLOAT divisor) const;
-    RGBA operator - () const;
+    RGBA& operator *= (FLOAT multiplier); // TODO
+    RGBA& operator /= (FLOAT multiplier); // TODO
 
-    explicit operator UINT32 () const;
+private:
+    explicit RGBA(__m128 rgba);  // These functions are private, because they don't take endianness into account
+    explicit RGBA(__m128i rgba); // and take arguments as they are.
+    explicit operator __m128();
 };

@@ -28,7 +28,7 @@ RGBA::RGBA(UINT32 rgba):
     blue((rgba >> 8) & 0xFF),
     alpha(rgba & 0xFF) {}
 
-RGBA RGBA::operator * (FLOAT multiplier) { // TODO fix, test
+RGBA RGBA::operator * (FLOAT multiplier) const { // TODO fix, test
     __m128i xmm0 = _mm_loadu_si32(this);
     __m128 xmm1 = _mm_load_ps(&multiplier);
     __m128i zero{};
@@ -41,11 +41,15 @@ RGBA RGBA::operator * (FLOAT multiplier) { // TODO fix, test
     return RGBA(xmm2);
 }
 
-RGBA RGBA::operator / (FLOAT multiplier) {
-    return *this * (1/multiplier);
+RGBA RGBA::operator / (FLOAT divisor) const {
+    return *this * (1/divisor);
 }
 
-RGBA::operator UINT32() {
+RGBA RGBA::operator - () const {
+    return RGBA{static_cast<BYTE>(255-red), static_cast<BYTE>(255-green), static_cast<BYTE>(255-blue), alpha};
+}
+
+RGBA::operator UINT32() const {
     BYTE littleEndian[4] = {alpha, blue, green, red};
     return *reinterpret_cast<UINT32*>(littleEndian); // IMPORTANT: This code assumes that little endian is used
     BYTE bigEndian[4] = {red, green, blue, alpha};

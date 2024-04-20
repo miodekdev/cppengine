@@ -12,8 +12,9 @@ struct RGBA {
     explicit RGBA(UINT32 rgba);
     RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255);
 
-    RGBA operator * (FLOAT multiplier);
-    RGBA operator / (FLOAT multiplier);
+    RGBA operator * (FLOAT multiplier) const;
+    RGBA operator / (FLOAT divisor) const;
+    RGBA operator - () const;
 
-    explicit operator UINT32 ();
+    explicit operator UINT32 () const;
 };

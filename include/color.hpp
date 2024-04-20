@@ -1,7 +1,7 @@
 #pragma once
 #include <d2d1_1.h>
 
-struct RGBA {
+struct RGBA { // TODO replace RGBA with RGB (alpha byte will become reserved)
     BYTE red{};
     BYTE green{};
     BYTE blue{};

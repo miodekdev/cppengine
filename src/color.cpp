@@ -25,8 +25,7 @@ RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
 
 RGBA RGBA::operator * (FLOAT multiplier) const {
     auto multiplicands = static_cast<__m128>(*this);
-    __m128 multipliers = _mm_load_ps(&multiplier);
-    multipliers = _mm_set1_ps(multiplier);
+    __m128 multipliers = _mm_set1_ps(multiplier);
     return RGBA(_mm_mul_ps(multiplicands, multipliers));
 }
 

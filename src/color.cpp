@@ -1,5 +1,7 @@
 #include "color.hpp"
 
+static __m128 BYTE_SATURATION {255, 255, 255, 255};
+
 RGBA::RGBA() :
         red(0),
         green(0),
@@ -12,7 +14,16 @@ RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha) :
         green(green),
         alpha(alpha) {}
 
-RGBA::RGBA(FLOAT rgba[4]) : RGBA(__m128{rgba[3], rgba[2], rgba[1], rgba[0]}) {}
+RGBA::RGBA(FLOAT rgba[4]) {
+    __m128 multiplicands = _mm_load_ps(rgba);
+    *this = RGBA(_mm_mul_ps(multiplicands, BYTE_SATURATION));
+}
+
+RGBA::RGBA(FLOAT saturation, FLOAT alpha) {
+    __m128 multiplicands = _mm_set1_ps(saturation);
+    multiplicands[3] = alpha;
+    *this = RGBA(_mm_mul_ps(multiplicands, BYTE_SATURATION));
+}
 
 RGBA::RGBA(__m128 rgba) : RGBA(_mm_cvtps_epi32(rgba)) {}
 

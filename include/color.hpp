@@ -10,6 +10,7 @@ struct RGBA { // TODO replace RGBA with RGB (alpha byte will become reserved)
 public:
     explicit RGBA();
     explicit RGBA(FLOAT rgba[4]);
+    explicit RGBA(FLOAT saturation, FLOAT alpha = 1);
     RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha = 255);
 
     RGBA operator - () const;
@@ -17,8 +18,8 @@ public:
     RGBA operator / (FLOAT divisor) const;
 
 private:
-    explicit RGBA(__m128 rgba);  // These functions are private, because they don't take endianness into account
-    explicit RGBA(__m128i rgba); // and take arguments as they are.
+    explicit RGBA(__m128 rgba);
+    explicit RGBA(__m128i rgba);
     explicit operator __m128() const;
     explicit operator __m128i() const;
 };

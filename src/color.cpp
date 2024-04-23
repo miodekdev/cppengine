@@ -1,6 +1,7 @@
 #include "color.hpp"
 
-static __m128 BYTE_SATURATION {255, 255, 255, 255};
+static const __m128 BYTE_SATURATION {255, 255, 255, 255};
+static const __m128i ZERO{};
 
 RGBA::RGBA() :
         red(0),
@@ -47,10 +48,9 @@ RGBA RGBA::operator - () const {
 }
 
 RGBA::operator __m128i() const {
-    const __m128i zero{};
     __m128i rgba = _mm_loadu_si32(this);
-    rgba = _mm_unpacklo_epi8(rgba, zero);
-    rgba = _mm_unpacklo_epi16(rgba, zero);
+    rgba = _mm_unpacklo_epi8(rgba, ZERO);
+    rgba = _mm_unpacklo_epi16(rgba, ZERO);
     return rgba;
 }
 

@@ -1,22 +1,20 @@
 #include "color.hpp"
 
-RGBA::RGBA():
+RGBA::RGBA() :
         red(0),
         green(0),
         blue(0),
         alpha(255) {}
 
-RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
+RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha) :
         red(red),
         blue(blue),
         green(green),
         alpha(alpha) {}
 
-RGBA::RGBA(FLOAT rgba[4]) {
-    *this = RGBA(__m128{rgba[3], rgba[2], rgba[1], rgba[0]});
-}
+RGBA::RGBA(FLOAT rgba[4]) : RGBA(__m128{rgba[3], rgba[2], rgba[1], rgba[0]}) {}
 
-RGBA::RGBA(__m128 rgba) {*this = RGBA(_mm_cvtps_epi32(rgba));}
+RGBA::RGBA(__m128 rgba) : RGBA(_mm_cvtps_epi32(rgba)) {}
 
 RGBA::RGBA(__m128i rgba) {
     rgba = _mm_packs_epi32(rgba, rgba);

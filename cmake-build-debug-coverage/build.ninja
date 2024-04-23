@@ -81,20 +81,6 @@ build CMakeFiles/engine.dir/src/color.cpp.obj: CXX_COMPILER__engine_unscanned_De
   OBJECT_DIR = CMakeFiles\engine.dir
   OBJECT_FILE_DIR = CMakeFiles\engine.dir\src
 
-build CMakeFiles/engine.dir/asm/color.asm.obj: ASM_NASM_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/asm/color.asm || cmake_object_order_depends_target_engine
-  DEFINES = -D_MBCS
-  DEP_FILE = CMakeFiles\engine.dir\asm\color.asm.obj.d
-  INCLUDES = -IC:/Users/maksy/Projects/engine/include
-  OBJECT_DIR = CMakeFiles\engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\engine.dir\asm
-
-build CMakeFiles/engine.dir/asm/physics.asm.obj: ASM_NASM_COMPILER__engine_unscanned_Debug C$:/Users/maksy/Projects/engine/asm/physics.asm || cmake_object_order_depends_target_engine
-  DEFINES = -D_MBCS
-  DEP_FILE = CMakeFiles\engine.dir\asm\physics.asm.obj.d
-  INCLUDES = -IC:/Users/maksy/Projects/engine/include
-  OBJECT_DIR = CMakeFiles\engine.dir
-  OBJECT_FILE_DIR = CMakeFiles\engine.dir\asm
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target engine
@@ -103,7 +89,7 @@ build CMakeFiles/engine.dir/asm/physics.asm.obj: ASM_NASM_COMPILER__engine_unsca
 #############################################
 # Link the executable engine.exe
 
-build engine.exe: CXX_EXECUTABLE_LINKER__engine_Debug CMakeFiles/engine.dir/src/main.cpp.obj CMakeFiles/engine.dir/src/graphics.cpp.obj CMakeFiles/engine.dir/src/physics.cpp.obj CMakeFiles/engine.dir/src/color.cpp.obj CMakeFiles/engine.dir/asm/color.asm.obj CMakeFiles/engine.dir/asm/physics.asm.obj
+build engine.exe: CXX_EXECUTABLE_LINKER__engine_Debug CMakeFiles/engine.dir/src/main.cpp.obj CMakeFiles/engine.dir/src/graphics.cpp.obj CMakeFiles/engine.dir/src/physics.cpp.obj CMakeFiles/engine.dir/src/color.cpp.obj
   FLAGS = --coverage -malign-double -m64 -g
   LINK_FLAGS = -mwindows --static
   LINK_LIBRARIES = -ld2d1  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

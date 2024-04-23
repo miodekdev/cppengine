@@ -12,16 +12,6 @@
 # =============================================================================
 
 #############################################
-# Rule for compiling ASM_NASM files.
-
-rule ASM_NASM_COMPILER__engine_unscanned_Debug
-  depfile = $DEP_FILE
-  deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}C:\Users\maksy\nasm\nasm.exe $DEFINES $INCLUDES $FLAGS -MD $DEP_FILE -MT $out -f win64 -o $out $in
-  description = Building ASM_NASM object $out
-
-
-#############################################
 # Rule for compiling CXX files.
 
 rule CXX_COMPILER__engine_unscanned_Debug

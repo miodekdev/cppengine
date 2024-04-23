@@ -12,6 +12,10 @@ RGBA::RGBA(BYTE red, BYTE green, BYTE blue, BYTE alpha):
         green(green),
         alpha(alpha) {}
 
+RGBA::RGBA(FLOAT rgba[4]) {
+    *this = RGBA(__m128{rgba[3], rgba[2], rgba[1], rgba[0]});
+}
+
 RGBA::RGBA(__m128 rgba) {*this = RGBA(_mm_cvtps_epi32(rgba));}
 
 RGBA::RGBA(__m128i rgba) {

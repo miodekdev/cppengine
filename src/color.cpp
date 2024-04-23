@@ -38,6 +38,7 @@ RGBA::RGBA(__m128i rgba) {
 RGBA RGBA::operator * (FLOAT multiplier) const {
     auto multiplicands = static_cast<__m128>(*this);
     __m128 multipliers = _mm_set1_ps(multiplier);
+    multipliers[3] = 1; // This prevents the alpha byte from being affected by the operation
     return RGBA(_mm_mul_ps(multiplicands, multipliers));
 }
 
